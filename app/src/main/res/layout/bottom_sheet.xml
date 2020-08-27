@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomSheetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_background">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/drag_to_ajust_title"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.sdsmdg.harjot.crollerTest.Croller
+        android:id="@+id/seekBar"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_margin="32dp"
+        app:back_circle_color="@color/lightGray"
+        app:indicator_color="@color/darkBlue"
+        app:indicator_width="20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:main_circle_color="@color/colorAccent"
+        app:progress_primary_color="@color/darkBlue"
+        app:progress_secondary_color="@color/lightGray" />
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:background="@drawable/rounded_background_button"
+        android:text="@string/btn_confirm"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/water_quantity" />
+
+    <TextView
+        android:id="@+id/water_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/darkBlue"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar"
+        app:layout_constraintStart_toStartOf="@+id/seekBar"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar"
+        tools:text="1000ml" />
+</androidx.constraintlayout.widget.ConstraintLayout>

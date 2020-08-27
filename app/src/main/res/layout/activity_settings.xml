@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_settings_layout_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
+
+    <ImageView
+        android:id="@+id/launcher_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:mipmap/sym_def_app_icon"
+        android:contentDescription="@string/desc_launcher_icon" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/launcher_icon"
+        app:layout_constraintStart_toEndOf="@+id/launcher_icon"
+        app:layout_constraintTop_toTopOf="@+id/launcher_icon">
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/app_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="v1.0.0" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_margin="32dp"
+        android:background="@color/lightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/launcher_icon" />
+
+    <View
+        android:id="@+id/line_2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_margin="32dp"
+        android:background="@color/lightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal_of_the_day_title" />
+
+    <View
+        android:id="@+id/line_3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_margin="32dp"
+        android:background="@color/lightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/general_title"
+        style="@style/grayTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:text="@string/general_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_1" />
+
+    <TextView
+        android:id="@+id/goal_of_the_day_title"
+        style="@style/blackText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/goal_of_the_day_title"
+        app:layout_constraintStart_toStartOf="@+id/general_title"
+        app:layout_constraintTop_toBottomOf="@+id/general_title" />
+
+    <TextView
+        android:id="@+id/goal_of_the_day"
+        style="@style/blueText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/goal_of_the_day_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/goal_of_the_day_title"
+        tools:text="1500ml" />
+
+    <TextView
+        android:id="@+id/app_settings_title"
+        style="@style/grayTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:text="@string/app_settings_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_2" />
+
+    <TextView
+        android:id="@+id/notification_title"
+        style="@style/blackText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/notification_title"
+        app:layout_constraintStart_toStartOf="@+id/app_settings_title"
+        app:layout_constraintTop_toBottomOf="@+id/app_settings_title" />
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/blackText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/set_time_reminder_title"
+        app:layout_constraintStart_toStartOf="@+id/app_settings_title"
+        app:layout_constraintTop_toBottomOf="@+id/notification_title" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/notification_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:theme="@style/notification_switch"
+        app:layout_constraintBottom_toBottomOf="@+id/notification_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/notification_title" />
+
+    <TextView
+        android:id="@+id/set_time_reminder"
+        style="@style/blueText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView5"
+        tools:text="Every 60 min" />
+
+    <TextView
+        android:id="@+id/refer_friends_link"
+        style="@style/blackText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:text="@string/refer_friends_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_3" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

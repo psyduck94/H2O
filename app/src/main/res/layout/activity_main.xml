@@ -1,24 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/container_activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    android:background="@color/colorPrimaryDark"
+    android:fitsSystemWindows="true">
 
     <include
-        layout="@layout/app_bar_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
+    <me.itangqi.waveloadingview.WaveLoadingView
+        android:id="@+id/waveLoadingView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:wlv_progressValue="0"
+        app:wlv_shapeType="rectangle"
+        app:wlv_waveAmplitude="25"
+        app:wlv_waveColor="@color/darkBlue">
+
+    </me.itangqi.waveloadingview.WaveLoadingView>
+
+    <TextView
+        android:id="@+id/water_progress"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
-</androidx.drawerlayout.widget.DrawerLayout>
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/default_water_progress"
+        android:textColor="@color/colorAccent"
+        android:textSize="100sp"
+        app:layout_constraintBottom_toBottomOf="@+id/waveLoadingView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add_water"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/how_much_water_did_you_drink_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_baseline_add_24"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/how_much_water_did_you_drink_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:gravity="center"
+        android:text="@string/how_much_water_did_you_drink_title"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

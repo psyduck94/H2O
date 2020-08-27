@@ -1,46 +1,73 @@
 package com.example.h2o.presentation.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.material.navigation.NavigationView
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
+import android.view.MenuItem
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import com.example.h2o.R
+import com.example.h2o.presentation.settings.SettingsActivity
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.sdsmdg.harjot.crollerTest.Croller
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.bottom_sheet.*
+import kotlinx.android.synthetic.main.toolbar.toolbar
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    private val viewModel by inject<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initToolbar()
-        initDrawerConfiguration()
-    }
-
-    private fun initDrawerConfiguration() {
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        val navController = findNavController(R.id.nav_host_fragment)
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
-            ), drawerLayout
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        onAddWaterButtonClick()
+        initViewModelObservers()
     }
 
     private fun initToolbar() {
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initViewModelObservers() {
+        viewModel.apply {
+            waterProgress.observe(this@MainActivity, Observer {
+                water_progress.text = "$it%"
+                waveLoadingView.progressValue = it
+            })
+        }
+    }
+
+    private fun onAddWaterButtonClick() {
+        btn_add_water.setOnClickListener { showBottomSheetDialog() }
+    }
+
+    private fun showBottomSheetDialog() {
+        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+        val bottomSheetView =
+            layoutInflater.inflate(R.layout.bottom_sheet, findViewById(R.id.bottomSheetContainer))
+        val seekBar = bottomSheetView.findViewById<Croller>(R.id.seekBar)
+        val waterQuantityTextView = bottomSheetView.findViewById<TextView>(R.id.water_quantity)
+
+        bottomSheetView.findViewById<Button>(R.id.btn_confirm).setOnClickListener {
+            viewModel.updateWaterProgress(waterQuantityTextView.text, seekBar.max)
+            bottomSheetDialog.dismiss()
+        }
+        bottomSheetDialog.setContentView(bottomSheetView)
+        setupSeekBar(seekBar, waterQuantityTextView)
+        bottomSheetDialog.show()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setupSeekBar(seekBar: Croller, waterQuantityTextView: TextView) {
+        seekBar.max = viewModel.fetchGoalOfTheDayFromCache()
+        seekBar.setOnProgressChangedListener { waterQuantityTextView.text = "${it*100}ml" }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -48,8 +75,10 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings -> startActivity(SettingsActivity.getIntent(this))
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

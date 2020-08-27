@@ -1,1 +1,2 @@
-#H2O 
+# H2O 
+A simple water reminder app

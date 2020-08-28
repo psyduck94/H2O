@@ -5,7 +5,9 @@ import androidx.preference.PreferenceManager
 import com.example.h2o.data.SettingsRepositoryImpl
 import com.example.h2o.data.local.SettingsCache
 import com.example.h2o.domain.repository.SettingsRepository
+import com.example.h2o.domain.usecase.GetCurrentWaterValueFromCache
 import com.example.h2o.domain.usecase.GetGoalOfTheDayFromCache
+import com.example.h2o.domain.usecase.SetCurrentWaterValueToCache
 import com.example.h2o.domain.usecase.SetGoalOfTheDayToCache
 import com.example.h2o.presentation.main.MainViewModel
 import com.example.h2o.presentation.settings.SettingsViewModel
@@ -17,7 +19,7 @@ import org.koin.dsl.module
 val appModule = module {
 
     viewModel {
-        MainViewModel(get())
+        MainViewModel(get(), get(), get())
     }
 
     viewModel {
@@ -27,6 +29,10 @@ val appModule = module {
     factory { GetGoalOfTheDayFromCache(get()) }
 
     factory { SetGoalOfTheDayToCache(get()) }
+
+    factory { GetCurrentWaterValueFromCache(get()) }
+
+    factory { SetCurrentWaterValueToCache(get()) }
 
     factory {
         SettingsRepositoryImpl(

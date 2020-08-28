@@ -9,4 +9,8 @@ class SettingsRepositoryImpl(private val settingsCache: SettingsCache) : Setting
 
     override fun setGoalOfTheDay(goal: Int) = settingsCache.setWaterGoalOfTheDay(goal)
 
+    override fun getCurrentWaterValue() = settingsCache.getCurrentWaterValue()
+
+    override fun setCurrentWaterValue(value: Int) = settingsCache.setCurrentWaterValue(value)
+
 }

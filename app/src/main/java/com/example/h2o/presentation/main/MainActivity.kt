@@ -1,7 +1,10 @@
 package com.example.h2o.presentation.main
 
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -13,7 +16,6 @@ import com.example.h2o.presentation.settings.SettingsActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sdsmdg.harjot.crollerTest.Croller
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.bottom_sheet.*
 import kotlinx.android.synthetic.main.toolbar.toolbar
 import org.koin.android.ext.android.inject
 
@@ -30,8 +32,21 @@ class MainActivity : AppCompatActivity() {
         initViewModelObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("onResume", "was called")
+        initSettings()
+    }
+
     private fun initToolbar() {
         setSupportActionBar(toolbar)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initSettings() {
+        water_progress.text = "${viewModel.fetchCurrentWaterValueFromCache()}%"
+        waveLoadingView.progressValue = viewModel.fetchCurrentWaterValueFromCache()
+        updateActionBarTitle()
     }
 
     @SuppressLint("SetTextI18n")
@@ -57,11 +72,16 @@ class MainActivity : AppCompatActivity() {
 
         bottomSheetView.findViewById<Button>(R.id.btn_confirm).setOnClickListener {
             viewModel.updateWaterProgress(waterQuantityTextView.text, seekBar.max)
+            updateActionBarTitle()
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.setContentView(bottomSheetView)
         setupSeekBar(seekBar, waterQuantityTextView)
         bottomSheetDialog.show()
+    }
+
+    private fun updateActionBarTitle() {
+        supportActionBar?.title = viewModel.getCurrentWaterInMl()
     }
 
     @SuppressLint("SetTextI18n")

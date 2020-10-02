@@ -2,6 +2,4 @@
 A simple water reminder app
 
 ## Screenshots
-![Screenshot] (https://raw.githubusercontent.com/luisfagundes94/H2O/master/screenshots/screenshot1.png)
-![Screenshot] (https://raw.githubusercontent.com/luisfagundes94/H2O/master/screenshots/screenshot3.png)
-![Screenshot] (https://raw.githubusercontent.com/luisfagundes94/H2O/master/screenshots/screenshot2.png)
+<img src="/screenshots/screenshot1.png" width="200" /> <img src="/screenshots/screenshot3.png" width="200" /> <img src="/screenshots/screenshot2.png" width="200" />

@@ -1,6 +1,6 @@
-package com.example.h2o.data
+package com.example.h2o.data.local.repositories
 
-import com.example.h2o.data.local.SettingsCache
+import com.example.h2o.data.local.cache.SettingsCache
 import com.example.h2o.domain.repository.SettingsRepository
 
 class SettingsRepositoryImpl(private val settingsCache: SettingsCache) : SettingsRepository {
@@ -8,9 +8,4 @@ class SettingsRepositoryImpl(private val settingsCache: SettingsCache) : Setting
     override fun getGoalOfTheDay() = settingsCache.getWaterGoalOfTheDay()
 
     override fun setGoalOfTheDay(goal: Int) = settingsCache.setWaterGoalOfTheDay(goal)
-
-    override fun getCurrentWaterValue() = settingsCache.getCurrentWaterValue()
-
-    override fun setCurrentWaterValue(value: Int) = settingsCache.setCurrentWaterValue(value)
-
 }

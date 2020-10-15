@@ -3,42 +3,54 @@ package com.example.h2o.presentation.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.h2o.domain.usecase.GetCurrentWaterValueFromCache
+import androidx.lifecycle.viewModelScope
+import com.example.h2o.domain.models.WaterLog
 import com.example.h2o.domain.usecase.GetGoalOfTheDayFromCache
-import com.example.h2o.domain.usecase.SetCurrentWaterValueToCache
+import com.example.h2o.domain.usecase.GetWaterLogFromLocalDb
+import com.example.h2o.domain.usecase.SaveWaterLogToLocalDb
+import com.example.h2o.domain.usecase.UpdateWaterLocalFromLocalDb
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainViewModel(
     private val getGoalOfTheDayFromCache: GetGoalOfTheDayFromCache,
-    private val getCurrentWaterValueFromCache: GetCurrentWaterValueFromCache,
-    private val setCurrentWaterValueToCache: SetCurrentWaterValueToCache
+    private val getWaterLogFromLocalDb: GetWaterLogFromLocalDb,
+    private val saveWaterLogToLocalDb: SaveWaterLogToLocalDb,
+    private val updateWaterLogFromLocalDb: UpdateWaterLocalFromLocalDb
 ) : ViewModel() {
 
-    private val waterProgressLiveData = MutableLiveData<Int>()
-    val waterProgress: LiveData<Int> = waterProgressLiveData
-
-    private val reachedMaxWaterProgressLiveData = MutableLiveData<Unit>()
-    val reachedMaxWaterProgress: LiveData<Unit> = reachedMaxWaterProgressLiveData
-
-    fun updateWaterProgress(seekBarLabelText: CharSequence, seekBarMaxValue: Int) {
-        val currentSeekBarValue = (seekBarLabelText.toString().replace("ml", "").toFloat()) / 100
-        val formattedResult = (currentSeekBarValue / seekBarMaxValue) * 100
-
-        setCurrentWaterValueToCache(currentSeekBarValue.toInt())
-        waterProgressLiveData.postValue(formattedResult.toInt())
-    }
+    private val waterLogLiveData = MutableLiveData<WaterLog>()
+    val waterLog: LiveData<WaterLog> = waterLogLiveData
 
     fun fetchGoalOfTheDayFromCache() = getGoalOfTheDayFromCache()
 
-    fun fetchCurrentWaterValueFromCache(): Int {
-        val goalOfTheDay = getGoalOfTheDayFromCache().toFloat()
-        val currentValue = getCurrentWaterValueFromCache().toFloat()
-        return ((currentValue/goalOfTheDay)*100).toInt()
+    fun fetchWaterLogFromLocalDb() {
+        viewModelScope.launch {
+            val waterLog = getWaterLogFromLocalDb() ?: createEmptyWaterLog()
+            waterLogLiveData.postValue(waterLog)
+        }
     }
 
-    fun getCurrentWaterInMl(): String {
-        val goalOfTheDay = getGoalOfTheDayFromCache() * 100
-        val currentValue = getCurrentWaterValueFromCache() * 100
-        return "$currentValue/${goalOfTheDay}ml"
+    fun updateWaterProgress(progress: String) {
+        viewModelScope.launch {
+            val realWaterProgress = progress.removeSuffix("ml").toInt()/100
+            updateWaterLogFromLocalDb(realWaterProgress)
+            val waterLog = getWaterLogFromLocalDb()
+            waterLog?.let { it.progress = realWaterProgress }
+            waterLogLiveData.postValue(waterLog)
+        }
     }
 
+    private fun createEmptyWaterLog(): WaterLog {
+        val waterLog = WaterLog(
+            goalOfTheDay = fetchGoalOfTheDayFromCache(),
+            progress = 0,
+            date = SimpleDateFormat("yyyy-M-dd", Locale.getDefault()).format(Date())
+        )
+        viewModelScope.launch {
+            saveWaterLogToLocalDb(waterLog)
+        }
+        return waterLog
+    }
 }

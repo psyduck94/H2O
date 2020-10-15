@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.fetchWaterLogFromLocalDb()
 
-        val waveLoadingView: WaveLoadingView
     }
 
     private fun initBindingConfig() {

@@ -21,7 +21,7 @@ internal interface WaterLogDao {
     @Query("SELECT * FROM water_log WHERE date = date('now', 'localtime')")
     suspend fun getWaterLog(): WaterLogData
 
-    @Query("SELECT * FROM water_log WHERE date BETWEEN datetime('now', '-6 days') AND datetime('now', 'localtime')")
+    @Query("SELECT * FROM water_log WHERE date BETWEEN datetime('now', '-6 days') AND datetime('now', 'localtime') ORDER BY date DESC")
     suspend fun getTheLast7WaterLogs(): List<WaterLogData>
 
 }

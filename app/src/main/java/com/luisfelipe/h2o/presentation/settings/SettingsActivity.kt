@@ -10,8 +10,11 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.luisfelipe.h2o.R
+import com.luisfelipe.h2o.databinding.ActivityMainBinding
+import com.luisfelipe.h2o.databinding.ActivitySettingsBinding
 import com.luisfelipe.h2o.domain.enums.InputState
 import com.luisfelipe.h2o.toast
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -19,6 +22,7 @@ import org.koin.android.ext.android.inject
 
 class SettingsActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivitySettingsBinding
     private val viewModel by inject<SettingsViewModel>()
 
     companion object {
@@ -27,14 +31,19 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        initBindingConfig()
 
         initToolbarTitle()
         setAppVersionCode()
-        onGoalOfTheDayClick()
-        initSettings()
+        goal_of_the_day.setOnClickListener { setupGoalOfTheDayDialog() }
 
         initViewModelObservers()
+    }
+
+    private fun initBindingConfig() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_settings)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
     }
 
     private fun initToolbarTitle() {
@@ -49,15 +58,6 @@ class SettingsActivity : AppCompatActivity() {
         val info: PackageInfo = manager.getPackageInfo(applicationContext.packageName, 0)
         val versionName = info.versionName
         app_version.text = "v${versionName}"
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun initSettings() {
-        goal_of_the_day.text = "${viewModel.fetchGoalOfTheDayFromCache()}ml"
-    }
-
-    private fun onGoalOfTheDayClick() {
-        goal_of_the_day.setOnClickListener { setupGoalOfTheDayDialog() }
     }
 
     private fun setupGoalOfTheDayDialog() {

@@ -13,6 +13,7 @@ import com.luisfelipe.h2o.databinding.ActivityMainBinding
 import com.luisfelipe.h2o.presentation.archives.ArchivesActivity
 import com.luisfelipe.h2o.presentation.settings.SettingsActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.luisfelipe.h2o.domain.enums.WaterAction
 import com.sdsmdg.harjot.crollerTest.Croller
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.toolbar
@@ -29,7 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         initBindingConfig()
         setSupportActionBar(toolbar)
-        btn_add_water.setOnClickListener { showBottomSheetDialog() }
+        btn_add_water.setOnClickListener { initBottomSheetDialog(WaterAction.ADD) }
+        btn_remove_water.setOnClickListener { initBottomSheetDialog(WaterAction.REMOVE) }
 
     }
 
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = viewModel
     }
 
-    private fun showBottomSheetDialog() {
+    private fun initBottomSheetDialog(action: WaterAction) {
         val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
         val bottomSheetView =
             layoutInflater.inflate(R.layout.bottom_sheet, findViewById(R.id.bottomSheetContainer))
@@ -52,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         val waterQuantityTextView = bottomSheetView.findViewById<TextView>(R.id.water_quantity)
 
         bottomSheetView.findViewById<Button>(R.id.btn_confirm).setOnClickListener {
-            viewModel.updateWaterProgress(waterQuantityTextView.text.toString())
+            viewModel.updateWater(waterQuantityTextView.text.toString(), action)
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.setContentView(bottomSheetView)

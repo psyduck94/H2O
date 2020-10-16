@@ -38,11 +38,11 @@ val appModule = module {
 
     factory { WaterLogAdapter() }
 
+    factory { UpdateWaterFromLocalDb(get()) }
+
     factory { UpdateGoalOfTheDayFromLocalDb(get()) }
 
     factory { GetTheLast7WaterLogsFromLocalDb(get()) }
-
-    factory { UpdateWaterLocalFromLocalDb(get()) }
 
     factory { GetWaterLogFromLocalDb(get()) }
 

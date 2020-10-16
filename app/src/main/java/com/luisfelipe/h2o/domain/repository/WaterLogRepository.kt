@@ -3,7 +3,7 @@ package com.luisfelipe.h2o.domain.repository
 import com.luisfelipe.h2o.domain.models.WaterLog
 
 interface WaterLogRepository {
-    suspend fun updateWaterProgressFromLocalDb(waterDrunk: Int)
+    suspend fun updateWaterFromLocalDb(water: Int)
     suspend fun getWaterLogFromLocalDb(): WaterLog?
     suspend fun getWaterLogListFromLocalDb(): List<WaterLog>
     suspend fun insertWaterLog(waterLog: WaterLog)

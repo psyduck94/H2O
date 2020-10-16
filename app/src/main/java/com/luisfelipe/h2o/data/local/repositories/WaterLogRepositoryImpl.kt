@@ -7,8 +7,8 @@ import com.luisfelipe.h2o.domain.repository.WaterLogRepository
 
 internal class WaterLogRepositoryImpl(private val waterLogDao: WaterLogDao): WaterLogRepository {
 
-    override suspend fun updateWaterProgressFromLocalDb(waterDrunk: Int) {
-        waterLogDao.updateWaterProgress(waterDrunk)
+    override suspend fun updateWaterFromLocalDb(water: Int) {
+        waterLogDao.updateWater(water)
     }
 
     override suspend fun getWaterLogFromLocalDb(): WaterLog? {

@@ -12,8 +12,8 @@ internal interface WaterLogDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWaterLog(waterLogData: WaterLogData)
 
-    @Query("UPDATE water_log SET waterDrunk = waterDrunk - -:increment WHERE date=date('now', 'localtime')")
-    suspend fun updateWaterProgress(increment: Int)
+    @Query("UPDATE water_log SET waterDrunk = waterDrunk -(:water) WHERE date=date('now', 'localtime')")
+    suspend fun updateWater(water: Int)
 
     @Query("UPDATE water_log SET waterNeed = :waterNeed WHERE date=date('now', 'localtime')")
     suspend fun updateGoalOfTheDay(waterNeed: Int)

@@ -30,5 +30,6 @@
     <string name="warning_invalid_goal">Ops! Try a number lower than 10000ml</string>
     <string name="warning_generic_error">An unexpected error has occured, please try again</string>
     <string name="warning_empty_number">Please enter a valid number</string>
-    <string name="desc_water_button">Add water drunk button</string>
+    <string name="desc_btn_add_water">Add water drunk button</string>
+    <string name="desc_btn_remove_water">Remove Water Button</string>
 </resources>

@@ -11,6 +11,7 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import com.example.h2o.R
 import com.example.h2o.databinding.ActivityMainBinding
+import com.example.h2o.presentation.archives.ArchivesActivity
 import com.example.h2o.presentation.settings.SettingsActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sdsmdg.harjot.crollerTest.Croller
@@ -22,7 +23,6 @@ import org.koin.android.ext.android.inject
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private val viewModel by inject<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         btn_add_water.setOnClickListener { showBottomSheetDialog() }
 
         viewModel.fetchWaterLogFromLocalDb()
-
     }
 
     private fun initBindingConfig() {
@@ -73,6 +72,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> startActivity(SettingsActivity.getIntent(this))
+            R.id.action_archives -> startActivity(ArchivesActivity.getIntent(this))
         }
         return super.onOptionsItemSelected(item)
     }

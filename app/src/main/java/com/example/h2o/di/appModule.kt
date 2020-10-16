@@ -10,6 +10,8 @@ import com.example.h2o.data.local.cache.SettingsCache
 import com.example.h2o.domain.repository.WaterLogRepository
 import com.example.h2o.domain.repository.SettingsRepository
 import com.example.h2o.domain.usecase.*
+import com.example.h2o.presentation.archives.ArchivesViewModel
+import com.example.h2o.presentation.archives.WaterLogAdapter
 import com.example.h2o.presentation.main.MainViewModel
 import com.example.h2o.presentation.settings.SettingsViewModel
 import org.koin.android.ext.koin.androidContext
@@ -27,8 +29,16 @@ val appModule = module {
     }
 
     viewModel {
+        ArchivesViewModel(get())
+    }
+
+    viewModel {
         SettingsViewModel(get(), get())
     }
+
+    factory { WaterLogAdapter() }
+
+    factory { GetTheLast7WaterLogsFromLocalDb(get()) }
 
     factory { UpdateWaterLocalFromLocalDb(get()) }
 

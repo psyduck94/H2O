@@ -9,7 +9,7 @@ import java.util.*
 @Entity(tableName = "water_log")
 data class WaterLogData(
     @PrimaryKey
-    val currentDate: String,
+    val date: String,
     val waterNeed: Int = DEFAULT_GOAL_OF_THE_DAY_VALUE,
     val waterDrunk: Int,
 )

@@ -24,4 +24,8 @@ internal class WaterLogRepositoryImpl(private val waterLogDao: WaterLogDao): Wat
         waterLogDao.insertWaterLog(WaterLogMapper.mapDomainToLocal(waterLog))
     }
 
+    override suspend fun getTheLast7WaterlogsFromLocalDb(): List<WaterLog> {
+        return WaterLogMapper.mapLocalToDomain(waterLogDao.getTheLast7WaterLogs())
+    }
+
 }

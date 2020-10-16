@@ -7,4 +7,5 @@ interface WaterLogRepository {
     suspend fun getWaterLogFromLocalDb(): WaterLog?
     suspend fun getWaterLogListFromLocalDb(): List<WaterLog>
     suspend fun insertWaterLog(waterLog: WaterLog)
+    suspend fun getTheLast7WaterlogsFromLocalDb(): List<WaterLog>
 }

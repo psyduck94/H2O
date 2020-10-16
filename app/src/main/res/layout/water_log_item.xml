@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="waterLog"
+            type="com.example.h2o.domain.models.WaterLog" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <me.itangqi.waveloadingview.WaveLoadingView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:waterProgressValue="@{waterLog.progress}"
+            app:wlv_shapeType="rectangle"
+            app:wlv_waveAmplitude="25"
+            app:wlv_waveColor="@color/darkBlue">
+
+        </me.itangqi.waveloadingview.WaveLoadingView>
+
+        <TextView
+            android:id="@+id/day_of_the_week"
+            style="@style/whiteTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Quarta-Feira" />
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/whiteTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/day_of_the_week"
+            app:layout_constraintStart_toStartOf="@+id/day_of_the_week"
+            app:layout_constraintTop_toBottomOf="@+id/day_of_the_week"
+            tools:text="09/10/2020"
+            android:text="@{waterLog.date}"/>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_margin="32dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date" />
+
+        <TextView
+            android:id="@+id/progress_in_percentage"
+            style="@style/whiteTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:textSize="50sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line"
+            tools:text="50%"
+            android:text="@{waterLog.progressInPercentage  + `%`}"/>
+
+        <TextView
+            android:id="@+id/progress_in_ml"
+            style="@style/whiteTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/progress_in_percentage"
+            app:layout_constraintStart_toStartOf="@+id/progress_in_percentage"
+            app:layout_constraintTop_toBottomOf="@+id/progress_in_percentage"
+            tools:text="1000/2000ml"
+            android:text="@{waterLog.progressInMl}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

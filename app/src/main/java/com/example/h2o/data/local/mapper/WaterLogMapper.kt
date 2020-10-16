@@ -11,7 +11,7 @@ internal class WaterLogMapper {
                 WaterLog(
                     progress = waterLogData.waterDrunk,
                     goalOfTheDay = waterLogData.waterNeed,
-                    date = waterLogData.currentDate
+                    date = waterLogData.date
                 )
             } else null
         }
@@ -22,7 +22,7 @@ internal class WaterLogMapper {
                 val dateLog = WaterLog(
                     progress = dateLogData.waterDrunk,
                     goalOfTheDay = dateLogData.waterNeed,
-                    date = dateLogData.currentDate
+                    date = dateLogData.date
                 )
                 dateLogList.add(dateLog)
             }
@@ -33,7 +33,7 @@ internal class WaterLogMapper {
             return WaterLogData(
                 waterDrunk = waterLog.progress,
                 waterNeed = waterLog.goalOfTheDay,
-                currentDate = waterLog.date
+                date = waterLog.date
             )
         }
     }

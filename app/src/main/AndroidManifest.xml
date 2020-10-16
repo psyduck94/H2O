@@ -3,13 +3,14 @@
     package="com.example.h2o">
 
     <application
-        android:allowBackup="true"
         android:name=".BaseApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".presentation.archives.ArchivesActivity" />
         <activity android:name=".presentation.settings.SettingsActivity" />
         <activity
             android:name=".presentation.main.MainActivity"

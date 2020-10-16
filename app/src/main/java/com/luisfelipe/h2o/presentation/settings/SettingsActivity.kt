@@ -37,6 +37,11 @@ class SettingsActivity : AppCompatActivity() {
         initViewModelObservers()
     }
 
+    private fun initToolbarTitle() {
+        this.title = "Settings"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
 
     @SuppressLint("SetTextI18n")
     private fun setAppVersionCode() {
@@ -49,12 +54,6 @@ class SettingsActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initSettings() {
         goal_of_the_day.text = "${viewModel.fetchGoalOfTheDayFromCache()}ml"
-    }
-
-    private fun initToolbarTitle() {
-        this.title = "Settings"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     private fun onGoalOfTheDayClick() {

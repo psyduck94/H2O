@@ -24,11 +24,18 @@ class ArchivesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initToolbarTitle()
         initBindingConfig()
         initRecyclerView()
         initViewModelObservers()
 
         viewModel.fetchTheLast7WaterLogsFromLocalDb()
+    }
+
+    private fun initToolbarTitle() {
+        this.title = "Archives"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     private fun initBindingConfig() {
@@ -51,5 +58,10 @@ class ArchivesActivity : AppCompatActivity() {
                 waterLogAdapter.updateWaterLogList(it)
             })
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

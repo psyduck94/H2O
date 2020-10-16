@@ -2,12 +2,12 @@ package com.luisfelipe.h2o.presentation.settings
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -19,6 +19,7 @@ import com.luisfelipe.h2o.domain.enums.InputState
 import com.luisfelipe.h2o.toast
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.koin.android.ext.android.inject
+import java.util.*
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -36,6 +37,7 @@ class SettingsActivity : AppCompatActivity() {
         initToolbarTitle()
         setAppVersionCode()
         goal_of_the_day.setOnClickListener { setupGoalOfTheDayDialog() }
+        time_reminder.setOnClickListener { openTimePicker() }
 
         initViewModelObservers()
     }
@@ -72,7 +74,29 @@ class SettingsActivity : AppCompatActivity() {
         val dialog = dialogBuilder.show()
         dialogView.findViewById<Button>(R.id.btn_confirm).setOnClickListener {
             viewModel.saveGoalOfTheDayToCache(goalOfTheDayInput.text.toString())
-            viewModel.updateGoalOfTheDayFromLocalDatabase(goalOfTheDayInput.text.toString())
+            dialog.dismiss()
+        }
+    }
+
+    private fun openTimePicker() {
+        val dialogBuilder = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(
+            R.layout.number_picker_dialog_layout,
+            findViewById(R.id.number_picker_container)
+        )
+
+        dialogBuilder.setView(dialogView)
+
+        val numberPicker = dialogView.findViewById<NumberPicker>(R.id.number_picker)
+        numberPicker.maxValue = 2
+        numberPicker.minValue = 0
+        numberPicker.displayedValues = arrayOf("Every 1 hour","Every 2 hours", "Every 3 hours")
+
+        val dialog = dialogBuilder.show()
+
+        dialogView.findViewById<TextView>(R.id.btn_positive).setOnClickListener {
+            val selectedValue = numberPicker.value
+            toast(selectedValue.toString())
             dialog.dismiss()
         }
     }

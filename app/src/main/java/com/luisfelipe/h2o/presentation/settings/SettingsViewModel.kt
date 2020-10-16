@@ -31,13 +31,14 @@ class SettingsViewModel(
             goal.isEmpty() -> goalOfTheDayInputStateLiveData.postValue(InputState.EMPTY)
             goal.toInt() > MAX_GOAL -> goalOfTheDayInputStateLiveData.postValue(InputState.INVALID)
             else -> {
-                goalOfTheDayInputStateLiveData.postValue(InputState.VALID)
+                updateGoalOfTheDayFromLocalDatabase(goal)
                 setGoalOfTheDayToCache(goal.toInt()/PERCENT)
+                goalOfTheDayInputStateLiveData.postValue(InputState.VALID)
             }
         }
     }
 
-    fun updateGoalOfTheDayFromLocalDatabase(goal: String) {
+    private fun updateGoalOfTheDayFromLocalDatabase(goal: String) {
         viewModelScope.launch {
             if (goal.isNotEmpty()) updateGoalOfTheDayFromLocalDb(goal.toInt()/100)
         }

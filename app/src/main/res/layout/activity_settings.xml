@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -8,9 +10,7 @@
             type="com.luisfelipe.h2o.presentation.settings.SettingsViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activity_settings_layout_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -80,7 +80,7 @@
             android:background="@color/lightGray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintTop_toBottomOf="@+id/time_reminder_title" />
 
         <TextView
             android:id="@+id/general_title"
@@ -133,7 +133,7 @@
             app:layout_constraintTop_toBottomOf="@+id/app_settings_title" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/time_reminder_title"
             style="@style/blackText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -152,14 +152,15 @@
             app:layout_constraintTop_toTopOf="@+id/notification_title" />
 
         <TextView
-            android:id="@+id/set_time_reminder"
+            android:id="@+id/time_reminder"
             style="@style/blueText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView5"
+            android:text="Every 3 hours"
+            app:layout_constraintBottom_toBottomOf="@+id/time_reminder_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="@+id/time_reminder_title"
             tools:text="Every 3 hours" />
 
         <TextView

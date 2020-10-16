@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:waterProgressValue="@{waterLog.progress}"
+            app:waterProgressValue="@{waterLog.progressInPercentage}"
             app:wlv_shapeType="rectangle"
             app:wlv_waveAmplitude="25"
             app:wlv_waveColor="@color/darkBlue">
@@ -37,7 +37,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Quarta-Feira" />
+            tools:text="Quarta-Feira"
+            android:text="@{waterLog.dayOfTheWeek}"/>
 
         <TextView
             android:id="@+id/date"

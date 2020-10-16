@@ -37,9 +37,9 @@ class SettingsViewModel(
         }
     }
 
-    fun updateGoalOfTheDayFromLocalDatabase(goal: Int) {
+    fun updateGoalOfTheDayFromLocalDatabase(goal: String) {
         viewModelScope.launch {
-            updateGoalOfTheDayFromLocalDb(goal)
+            if (goal.isNotEmpty()) updateGoalOfTheDayFromLocalDb(goal.toInt()/100)
         }
     }
 }

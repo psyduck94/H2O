@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.h2o.presentation.main.MainViewModel" />
+            type="com.luisfelipe.h2o.presentation.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

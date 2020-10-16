@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.h2o.presentation.archives.ArchivesViewModel" />
+            type="com.luisfelipe.h2o.presentation.archives.ArchivesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

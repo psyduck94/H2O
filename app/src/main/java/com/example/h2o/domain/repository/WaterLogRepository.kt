@@ -8,4 +8,5 @@ interface WaterLogRepository {
     suspend fun getWaterLogListFromLocalDb(): List<WaterLog>
     suspend fun insertWaterLog(waterLog: WaterLog)
     suspend fun getTheLast7WaterlogsFromLocalDb(): List<WaterLog>
+    suspend fun updateGoalOfTheDayFromLocalDb(goalOfTheDay: Int)
 }

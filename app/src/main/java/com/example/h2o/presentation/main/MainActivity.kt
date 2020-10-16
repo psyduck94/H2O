@@ -33,6 +33,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         btn_add_water.setOnClickListener { showBottomSheetDialog() }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.fetchWaterLogFromLocalDb()
     }
 

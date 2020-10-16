@@ -16,6 +16,9 @@ internal interface WaterLogDao {
     @Query("UPDATE water_log SET waterDrunk = waterDrunk - -:increment WHERE date=date('now', 'localtime')")
     suspend fun updateWaterProgress(increment: Int)
 
+    @Query("UPDATE water_log SET waterNeed = :waterNeed WHERE date=date('now', 'localtime')")
+    suspend fun updateGoalOfTheDay(waterNeed: Int)
+
     @Query("SELECT * FROM water_log WHERE date = date('now', 'localtime')")
     suspend fun getWaterLog(): WaterLogData
 

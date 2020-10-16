@@ -33,10 +33,12 @@ val appModule = module {
     }
 
     viewModel {
-        SettingsViewModel(get(), get())
+        SettingsViewModel(get(), get(), get())
     }
 
     factory { WaterLogAdapter() }
+
+    factory { UpdateGoalOfTheDayFromLocalDb(get()) }
 
     factory { GetTheLast7WaterLogsFromLocalDb(get()) }
 

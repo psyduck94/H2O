@@ -28,4 +28,8 @@ internal class WaterLogRepositoryImpl(private val waterLogDao: WaterLogDao): Wat
         return WaterLogMapper.mapLocalToDomain(waterLogDao.getTheLast7WaterLogs())
     }
 
+    override suspend fun updateGoalOfTheDayFromLocalDb(goalOfTheDay: Int) {
+        waterLogDao.updateGoalOfTheDay(goalOfTheDay)
+    }
+
 }

@@ -75,6 +75,7 @@ class SettingsActivity : AppCompatActivity() {
         val dialog = dialogBuilder.show()
         dialogView.findViewById<Button>(R.id.btn_confirm).setOnClickListener {
             viewModel.saveGoalOfTheDayToCache(goalOfTheDayInput.text.toString())
+            viewModel.updateGoalOfTheDayFromLocalDatabase(goalOfTheDayInput.text.toString().toInt()/100)
             dialog.dismiss()
         }
     }

@@ -1,5 +1,6 @@
 package com.luisfelipe.h2o.data.local.repositories
 
+import android.util.Log
 import com.luisfelipe.h2o.data.local.dao.WaterLogDao
 import com.luisfelipe.h2o.data.local.mapper.WaterLogMapper
 import com.luisfelipe.h2o.domain.models.WaterLog

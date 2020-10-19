@@ -44,20 +44,19 @@ class MainViewModel(
         when (action) {
             WaterAction.ADD -> {
                 updateWaterFromLocalDb(-realWaterProgress)
-                updateWaterLog(realWaterProgress)
+                updateWaterLogLiveData()
             }
             WaterAction.REMOVE -> {
                 if (checkIfCanRemoveWater(realWaterProgress)) {
                     updateWaterFromLocalDb(realWaterProgress)
-                    updateWaterLog(realWaterProgress)
+                    updateWaterLogLiveData()
                 } else cantRemoveWaterLiveData.postValue(Unit)
             }
         }
     }
 
-    private suspend fun updateWaterLog(realWaterProgress: Int) {
+    private suspend fun updateWaterLogLiveData() {
         val waterLog = getWaterLogFromLocalDb()
-        waterLog?.let { it.progress = realWaterProgress }
         waterLogLiveData.postValue(waterLog)
     }
 

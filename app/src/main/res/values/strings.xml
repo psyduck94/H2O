@@ -25,7 +25,7 @@
     <string name="how_much_water_did_you_drink_title">How much water did you drink?</string>
     <string name="default_water_progress">0%</string>
     <string name="water_unity">ml</string>
-    <string name="goal_of_the_day_hint">ex: 1500</string>
+    <string name="goal_of_the_day_hint">E.g. 1500</string>
     <string name="warning_empty_fields">Please, fill out all fields</string>
     <string name="warning_invalid_goal">Ops! Try a number lower than 10000ml</string>
     <string name="warning_generic_error">An unexpected error has occured, please try again</string>

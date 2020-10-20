@@ -16,7 +16,8 @@ class MainViewModel(
     private val getGoalOfTheDayFromCache: GetGoalOfTheDayFromCache,
     private val getWaterLogFromLocalDb: GetWaterLogFromLocalDb,
     private val saveWaterLogToLocalDb: SaveWaterLogToLocalDb,
-    private val updateWaterFromLocalDb: UpdateWaterFromLocalDb
+    private val updateWaterFromLocalDb: UpdateWaterFromLocalDb,
+    private val getTimeIntervalFromCache: GetTimeIntervalFromCache
 ) : ViewModel() {
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -27,6 +28,8 @@ class MainViewModel(
     val cantRemoveWater: LiveData<Unit> = cantRemoveWaterLiveData
 
     fun fetchGoalOfTheDayFromCache() = getGoalOfTheDayFromCache()
+
+    fun fetchTimeIntervalFromCache() = getTimeIntervalFromCache()
 
     fun fetchWaterLogFromLocalDb() {
         viewModelScope.launch {

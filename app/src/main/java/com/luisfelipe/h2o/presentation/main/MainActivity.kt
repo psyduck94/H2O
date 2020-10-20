@@ -2,22 +2,27 @@ package com.luisfelipe.h2o.presentation.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.work.*
 import com.luisfelipe.h2o.R
 import com.luisfelipe.h2o.databinding.ActivityMainBinding
 import com.luisfelipe.h2o.presentation.archives.ArchivesActivity
 import com.luisfelipe.h2o.presentation.settings.SettingsActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luisfelipe.h2o.domain.enums.WaterAction
+import com.luisfelipe.h2o.services.DrinkWaterWorker
 import com.sdsmdg.harjot.crollerTest.Croller
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.toolbar
 import org.koin.android.ext.android.inject
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,11 +33,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        scheduleNotification()
         initBindingConfig()
         setSupportActionBar(toolbar)
+
         btn_add_water.setOnClickListener { initBottomSheetDialog(WaterAction.ADD) }
         btn_remove_water.setOnClickListener { initBottomSheetDialog(WaterAction.REMOVE) }
-
     }
 
     override fun onResume() {
@@ -65,7 +71,21 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun setupSeekBar(seekBar: Croller, waterQuantityTextView: TextView) {
         seekBar.max = viewModel.fetchGoalOfTheDayFromCache()
-        seekBar.setOnProgressChangedListener { waterQuantityTextView.text = "${it*100}ml" }
+        seekBar.setOnProgressChangedListener { waterQuantityTextView.text = "${it * 100}ml" }
+    }
+
+    private fun scheduleNotification() {
+        val timeInterval = viewModel.fetchTimeIntervalFromCache()
+        val drinkWaterWorkRequest =
+            PeriodicWorkRequestBuilder<DrinkWaterWorker>(timeInterval, TimeUnit.HOURS)
+                .setInitialDelay(timeInterval, TimeUnit.HOURS)
+                .build()
+        val workManager = WorkManager.getInstance(applicationContext)
+        workManager.enqueueUniquePeriodicWork(
+            "NotificationWorkTag",
+            ExistingPeriodicWorkPolicy.KEEP,
+            drinkWaterWorkRequest
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -1,4 +1,4 @@
-package com.luisfelipe.h2o.presentation.main
+package com.luisfelipe.h2o.utils
 
 import androidx.databinding.BindingAdapter
 import me.itangqi.waveloadingview.WaveLoadingView

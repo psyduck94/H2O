@@ -33,4 +33,8 @@
     <string name="desc_btn_add_water">Add water drunk button</string>
     <string name="desc_btn_remove_water">Remove Water Button</string>
     <string name="btn_positive">OK</string>
+    <string name="water_notification_title">Drink water!</string>
+    <string name="water_notification_content">It\'s time to drink water to stay hydrated</string>
+    <string name="channel_water_reminder">Water Reminder</string>
+    <string name="channel_water_description">Receive notifications to remind you to drink water</string>
 </resources>

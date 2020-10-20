@@ -25,7 +25,13 @@ private const val APP_DATABASE = "APP_DATABASE"
 val appModule = module {
 
     viewModel {
-        MainViewModel(get(), get(), get(), get())
+        MainViewModel(
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
     }
 
     viewModel {
@@ -37,6 +43,8 @@ val appModule = module {
     }
 
     factory { WaterLogAdapter() }
+
+    factory { GetTimeIntervalFromCache(get()) }
 
     factory { UpdateWaterFromLocalDb(get()) }
 

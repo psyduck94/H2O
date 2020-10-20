@@ -72,7 +72,7 @@ dependencies {
     implementation "org.koin:koin-android-viewmodel:$koin_version"
 
     // SharedPreferences
-    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.preference:preference-ktx:1.1.1'
 
     // Room
     def room_version = "2.2.5"
@@ -86,6 +86,11 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-debug:1.4.0-M1'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    // Work Manager
+    def work_manager_version = "2.4.0"
+    implementation "androidx.work:work-runtime-ktx:$work_manager_version"
+    androidTestImplementation "androidx.work:work-testing:$work_manager_version"
 
     // Mockk - Unit Testing
     def mockk_version = "1.10.0"

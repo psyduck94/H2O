@@ -11,8 +11,8 @@ class SettingsCache(private val sharedPreferences: SharedPreferences) {
         const val TIME_REMINDER_STATE_KEY = "NOTIFICATION_SWITCH"
         const val DEFAULT_TIME_REMINDER_STATE = "OFF"
 
-        const val HOURS_KEY = "EVERY_X_HOURS"
-        const val DEFAULT_HOURS = 3
+        const val TIME_INTERVAL = "EVERY_X_HOURS"
+        const val DEFAULT_TIME_INTERVAL = 3
     }
 
     fun getWaterGoalOfTheDay() =
@@ -27,9 +27,9 @@ class SettingsCache(private val sharedPreferences: SharedPreferences) {
     fun setTimeReminderState(timeReminderState: String) =
         sharedPreferences.edit().putString(TIME_REMINDER_STATE_KEY, timeReminderState)
 
-    fun getHours() =
-        sharedPreferences.getInt(HOURS_KEY, DEFAULT_HOURS)
+    fun getTimeInterval() =
+        sharedPreferences.getLong(TIME_INTERVAL, DEFAULT_TIME_INTERVAL.toLong())
 
-    fun setHours(hours: Int) =
-        sharedPreferences.edit().putInt(HOURS_KEY, hours)
+    fun setTimeInterval(hours: Long) =
+        sharedPreferences.edit().putLong(TIME_INTERVAL, hours).apply()
 }

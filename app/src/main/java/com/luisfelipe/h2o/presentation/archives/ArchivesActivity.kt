@@ -28,8 +28,6 @@ class ArchivesActivity : AppCompatActivity() {
         initBindingConfig()
         initRecyclerView()
         initViewModelObservers()
-
-        viewModel.fetchTheLast7WaterLogsFromLocalDb()
     }
 
     private fun initToolbarTitle() {

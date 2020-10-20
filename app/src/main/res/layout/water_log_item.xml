@@ -50,7 +50,7 @@
             app:layout_constraintStart_toStartOf="@+id/day_of_the_week"
             app:layout_constraintTop_toBottomOf="@+id/day_of_the_week"
             tools:text="09/10/2020"
-            android:text="@{waterLog.date}"/>
+            android:text="@{waterLog.formattedDate}"/>
 
         <View
             android:id="@+id/line"

@@ -1,5 +1,6 @@
 package com.luisfelipe.h2o.presentation.main
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,7 +19,8 @@ class MainViewModel(
     private val updateWaterFromLocalDb: UpdateWaterFromLocalDb
 ) : ViewModel() {
 
-    private val waterLogLiveData = MutableLiveData<WaterLog>()
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    internal val waterLogLiveData = MutableLiveData<WaterLog>()
     val waterLog: LiveData<WaterLog> = waterLogLiveData
 
     private val cantRemoveWaterLiveData = MutableLiveData<Unit>()
@@ -60,7 +62,7 @@ class MainViewModel(
         waterLogLiveData.postValue(waterLog)
     }
 
-    private suspend fun checkIfCanRemoveWater(realWaterProgress: Int): Boolean {
+    internal suspend fun checkIfCanRemoveWater(realWaterProgress: Int): Boolean {
         var canRemoveWater = false
         val waterLog = getWaterLogFromLocalDb()
         waterLog?.let { canRemoveWater = it.progress - realWaterProgress >= 0 }
@@ -70,7 +72,7 @@ class MainViewModel(
     private fun getRealWaterProgress(progress: String) =
         progress.removeSuffix("ml").toInt() / 100
 
-    private suspend fun createEmptyWaterLog(): WaterLog {
+    internal suspend fun createEmptyWaterLog(): WaterLog {
         val waterLog = WaterLog(
             goalOfTheDay = fetchGoalOfTheDayFromCache(),
             progress = 0,

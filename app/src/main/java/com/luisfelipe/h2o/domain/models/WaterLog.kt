@@ -17,6 +17,8 @@ data class WaterLog(
         val fullDate = SimpleDateFormat("yyyy-M-dd", Locale.getDefault()).parse(date)
         return SimpleDateFormat("EEEE", Locale.getDefault()).format(fullDate)
     }
+
+    fun formattedDate() = date.split("-").reversed().joinToString("/")
 }
 
 

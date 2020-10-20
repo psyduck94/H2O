@@ -8,7 +8,7 @@ A simple water reminder app
 - Download or clone this remote repository to your local machine.
 - Download and open Android Studio
 - Sync the project to download dependencies
-- Run the application using an Emulator or a real device.
+- Run the application using an emulator or a real device.
 
 ## Main Dependencies
 ### [Room](https://developer.android.com/topic/libraries/architecture/room)

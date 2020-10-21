@@ -36,8 +36,8 @@ class SettingsActivity : AppCompatActivity() {
 
         initToolbarTitle()
         setAppVersionCode()
-        goal_of_the_day.setOnClickListener { setupGoalOfTheDayDialog() }
-        time_reminder.setOnClickListener { openTimePicker() }
+        binding.goalOfTheDay.setOnClickListener { setupGoalOfTheDayDialog() }
+        binding.timeReminder.setOnClickListener { openTimePicker() }
 
         initViewModelObservers()
     }
@@ -107,7 +107,7 @@ class SettingsActivity : AppCompatActivity() {
             goalOfTheDayInputState.observe(this@SettingsActivity, Observer { state ->
                 when (state) {
                     InputState.VALID -> {
-                        goal_of_the_day.text = "${viewModel.fetchGoalOfTheDayFromCache()}ml"
+                        binding.goalOfTheDay.text = "${viewModel.fetchGoalOfTheDayFromCache()}ml"
                     }
                     InputState.EMPTY -> toast(getString(R.string.warning_empty_number))
                     InputState.INVALID -> toast(getString(R.string.warning_invalid_goal))

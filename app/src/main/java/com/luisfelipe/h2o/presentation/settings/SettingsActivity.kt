@@ -59,7 +59,7 @@ class SettingsActivity : AppCompatActivity() {
         val manager: PackageManager = applicationContext.packageManager
         val info: PackageInfo = manager.getPackageInfo(applicationContext.packageName, 0)
         val versionName = info.versionName
-        app_version.text = "v${versionName}"
+        binding.appVersion.text = "v${versionName}"
     }
 
     private fun setupGoalOfTheDayDialog() {

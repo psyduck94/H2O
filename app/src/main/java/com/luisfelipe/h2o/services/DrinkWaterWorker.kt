@@ -12,7 +12,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.luisfelipe.h2o.R
 import com.luisfelipe.h2o.presentation.main.MainActivity
-import com.luisfelipe.h2o.utils.GlobalConstants
+import com.luisfelipe.h2o.utils.Constants
 
 class DrinkWaterWorker(private val context: Context, params: WorkerParameters) :
     CoroutineWorker(context, params) {
@@ -32,7 +32,7 @@ class DrinkWaterWorker(private val context: Context, params: WorkerParameters) :
         val pendingIntent = createPendingIntent()
 
         val notificationBuilder =
-            NotificationCompat.Builder(context, GlobalConstants.WATER_CHANNEL_ID)
+            NotificationCompat.Builder(context, Constants.WATER_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_water_drop)
                 .setSound(defaultSoundUri)
                 .setContentTitle(context.getString(R.string.water_notification_title))
@@ -62,7 +62,7 @@ class DrinkWaterWorker(private val context: Context, params: WorkerParameters) :
 
             val importance = NotificationManager.IMPORTANCE_HIGH
             val channel =
-                NotificationChannel(GlobalConstants.WATER_CHANNEL_ID, name, importance).apply {
+                NotificationChannel(Constants.WATER_CHANNEL_ID, name, importance).apply {
                     description = descriptionText
                 }
             val notificationManager =

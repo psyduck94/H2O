@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
         initBindingConfig()
         setSupportActionBar(toolbar)
 
-        btn_add_water.setOnClickListener { initBottomSheetDialog(WaterAction.ADD) }
-        btn_remove_water.setOnClickListener { initBottomSheetDialog(WaterAction.REMOVE) }
+        binding.btnAddWater.setOnClickListener { initBottomSheetDialog(WaterAction.ADD) }
+        binding.btnRemoveWater.setOnClickListener { initBottomSheetDialog(WaterAction.REMOVE) }
     }
 
     override fun onResume() {

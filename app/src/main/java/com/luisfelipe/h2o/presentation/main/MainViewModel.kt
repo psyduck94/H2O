@@ -1,6 +1,5 @@
 package com.luisfelipe.h2o.presentation.main
 
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.luisfelipe.h2o.domain.enums.WaterAction
 import com.luisfelipe.h2o.domain.models.WaterLog
 import com.luisfelipe.h2o.domain.usecase.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,8 +20,7 @@ class MainViewModel(
     private val getTimeIntervalFromCache: GetTimeIntervalFromCache
 ) : ViewModel() {
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    internal val waterLogLiveData = MutableLiveData<WaterLog>()
+    private val waterLogLiveData = MutableLiveData<WaterLog>()
     val waterLog: LiveData<WaterLog> = waterLogLiveData
 
     private val cantRemoveWaterLiveData = MutableLiveData<Unit>()

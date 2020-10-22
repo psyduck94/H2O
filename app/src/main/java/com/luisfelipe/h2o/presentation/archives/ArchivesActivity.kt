@@ -43,7 +43,7 @@ class ArchivesActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        archives_recycler_view.apply {
+        binding.archivesRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = defaultRecyclerViewLayout()
             adapter = waterLogAdapter

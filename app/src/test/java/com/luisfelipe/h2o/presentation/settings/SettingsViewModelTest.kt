@@ -71,7 +71,6 @@ class SettingsViewModelTest {
         viewModel.saveGoalOfTheDayToCache(validGoal)
 
         assert(viewModel.goalOfTheDayInputState.observedValue() == InputState.VALID)
-
     }
 
     @Test

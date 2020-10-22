@@ -37,4 +37,5 @@
     <string name="water_notification_content">It\'s time to drink water to stay hydrated</string>
     <string name="channel_water_reminder">Water Reminder</string>
     <string name="channel_water_description">Receive notifications to remind you to drink water</string>
+    <string name="warning_cant_remove_water">You can\'t remove any more water.</string>
 </resources>

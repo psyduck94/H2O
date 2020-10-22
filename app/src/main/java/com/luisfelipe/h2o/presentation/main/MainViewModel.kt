@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.luisfelipe.h2o.R
 import com.luisfelipe.h2o.domain.enums.WaterAction
 import com.luisfelipe.h2o.domain.models.WaterLog
 import com.luisfelipe.h2o.domain.usecase.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,8 +23,8 @@ class MainViewModel(
     private val waterLogLiveData = MutableLiveData<WaterLog>()
     val waterLog: LiveData<WaterLog> = waterLogLiveData
 
-    private val cantRemoveWaterLiveData = MutableLiveData<Unit>()
-    val cantRemoveWater: LiveData<Unit> = cantRemoveWaterLiveData
+    private val statusMessageLiveData = MutableLiveData<Int>()
+    val statusMessage: LiveData<Int> = statusMessageLiveData
 
     fun fetchGoalOfTheDayFromCache() = getGoalOfTheDayFromCache()
 
@@ -54,7 +54,7 @@ class MainViewModel(
                 if (checkIfCanRemoveWater(realWaterProgress)) {
                     updateWaterFromLocalDb(realWaterProgress)
                     updateWaterLogLiveData()
-                } else cantRemoveWaterLiveData.postValue(Unit)
+                } else statusMessageLiveData.postValue(R.string.warning_cant_remove_water)
             }
         }
     }

@@ -18,6 +18,7 @@ import com.luisfelipe.h2o.presentation.settings.SettingsActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luisfelipe.h2o.domain.enums.WaterAction
 import com.luisfelipe.h2o.services.DrinkWaterWorker
+import com.luisfelipe.h2o.toast
 import com.sdsmdg.harjot.crollerTest.Croller
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.toolbar
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         scheduleNotification()
         initBindingConfig()
+        initViewModelObservers()
         setSupportActionBar(toolbar)
 
         binding.btnAddWater.setOnClickListener { initBottomSheetDialog(WaterAction.ADD) }
@@ -50,6 +52,14 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+    }
+
+    private fun initViewModelObservers() {
+        viewModel.apply {
+            statusMessage.observe(this@MainActivity, { stringResourceId ->
+                toast(stringResourceId)
+            })
+        }
     }
 
     private fun initBottomSheetDialog(action: WaterAction) {

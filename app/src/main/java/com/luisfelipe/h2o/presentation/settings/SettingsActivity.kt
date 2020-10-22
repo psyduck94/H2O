@@ -2,24 +2,21 @@ package com.luisfelipe.h2o.presentation.settings
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.luisfelipe.h2o.R
-import com.luisfelipe.h2o.databinding.ActivityMainBinding
 import com.luisfelipe.h2o.databinding.ActivitySettingsBinding
 import com.luisfelipe.h2o.domain.enums.InputState
 import com.luisfelipe.h2o.toast
-import kotlinx.android.synthetic.main.activity_settings.*
 import org.koin.android.ext.android.inject
-import java.util.*
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -36,10 +33,10 @@ class SettingsActivity : AppCompatActivity() {
 
         initToolbarTitle()
         setAppVersionCode()
+        initViewModelObservers()
+
         binding.goalOfTheDay.setOnClickListener { setupGoalOfTheDayDialog() }
         binding.timeReminder.setOnClickListener { openTimePicker() }
-
-        initViewModelObservers()
     }
 
     private fun initBindingConfig() {
@@ -87,18 +84,29 @@ class SettingsActivity : AppCompatActivity() {
 
         dialogBuilder.setView(dialogView)
 
-        val numberPicker = dialogView.findViewById<NumberPicker>(R.id.number_picker)
-        numberPicker.maxValue = 2
-        numberPicker.minValue = 0
-        numberPicker.displayedValues = arrayOf("Every 1 hour","Every 2 hours", "Every 3 hours")
-
+        val numberPicker = setUpNumberPicker(dialogView)
         val dialog = dialogBuilder.show()
 
         dialogView.findViewById<TextView>(R.id.btn_positive).setOnClickListener {
-            val selectedValue = numberPicker.value
-            toast(selectedValue.toString())
-            dialog.dismiss()
+            getSelectedValueFromTimePicker(numberPicker, dialog)
         }
+    }
+
+    private fun getSelectedValueFromTimePicker(
+        numberPicker: NumberPicker?,
+        dialog: AlertDialog
+    ) {
+        val selectedValue = numberPicker?.value
+        toast(selectedValue.toString())
+        dialog.dismiss()
+    }
+
+    private fun setUpNumberPicker(dialogView: View): NumberPicker? {
+        val numberPicker = dialogView.findViewById<NumberPicker>(R.id.number_picker)
+        numberPicker.maxValue = 2
+        numberPicker.minValue = 0
+        numberPicker.displayedValues = arrayOf("Every 1 hour", "Every 2 hours", "Every 3 hours")
+        return numberPicker
     }
 
     @SuppressLint("SetTextI18n")

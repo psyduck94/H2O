@@ -57,7 +57,6 @@
 
     <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="android:textColorPrimary">@color/blue</item>
-        <item name="android:textStyle">bold</item>
         <item name="colorControlNormal">@color/lightGray</item>
     </style>
 
